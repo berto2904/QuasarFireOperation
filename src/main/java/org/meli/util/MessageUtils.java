@@ -1,15 +1,16 @@
 package org.meli.util;
 
+import org.meli.exception.MessageConflictException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class MessageUtils {
 
     public static String reconstructMessage(String[][] messages) {
         if (messages == null || messages.length == 0) {
-            return null;
+            throw new MessageConflictException("El mensaje vino vacio o nulo.");
         }
 
         int maxLength = Arrays.stream(messages)
@@ -30,7 +31,7 @@ public class MessageUtils {
                     if (result[position] == null) {
                         result[position] = word;
                     } else if (!result[position].equals(word)) {
-                        return null;
+                        throw new MessageConflictException("Conflicto en la reconstruccion del mensaje");
                     }
                 }
             }

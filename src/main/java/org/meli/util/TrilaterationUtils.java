@@ -1,5 +1,6 @@
 package org.meli.util;
 
+import org.meli.exception.PositionNotResolvableException;
 import org.meli.model.Point;
 
 import java.util.Arrays;
@@ -10,7 +11,7 @@ public class TrilaterationUtils {
     public static Point calculateLocation(List<Point> positions, double[] distancesArray) {
 
         if (positions.size() != 3 || distancesArray.length != 3) {
-            throw new IllegalArgumentException("Se requieren 3 posiciones y 3 distancias.");
+            throw new PositionNotResolvableException("Se requieren 3 posiciones y 3 distancias.");
         }
 
         List<Double> distances = Arrays.stream(distancesArray)
@@ -39,16 +40,12 @@ public class TrilaterationUtils {
 
         double denominator = A * E - B * D;
         if (denominator == 0) {
-            throw new IllegalStateException("No se puede determinar la posición: sistema indeterminado o satélites colineales.");
+            throw new PositionNotResolvableException("No se puede determinar la posición: sistema indeterminado o satélites colineales.");
         }
 
         double x = (C * E - B * F) / denominator;
         double y = (A * F - C * D) / denominator;
 
         return new Point(x, y);
-    }
-
-    public static Object getPositionByName(String name) {
-        return null;
     }
 }
