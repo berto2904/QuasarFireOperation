@@ -7,4 +7,5 @@ import java.util.List;
 public interface LocationSplitService extends LocationService {
     void saveSatellite(SatelliteDataDTO satelliteDataDTO);
     List<SatelliteDataDTO> getAllSatellites();
+    boolean clearSatellites();
 }

@@ -1,11 +1,9 @@
 package org.meli.service.impl;
 
-import lombok.RequiredArgsConstructor;
 import org.meli.dto.SatelliteDataDTO;
 import org.meli.model.Point;
 import org.meli.model.Satellite;
 import org.meli.repository.SatelliteReadWriteRepository;
-import org.meli.repository.impl.SatelliteMemoryStorageRepositoryImpl;
 import org.meli.repository.SatelliteReadOnlyRepository;
 import org.meli.service.LocationSplitService;
 import org.meli.util.TrilaterationUtils;
@@ -65,5 +63,10 @@ public class LocationSplitServiceImpl implements LocationSplitService {
                         .message(s.getMessage())
                         .build())
                 .toList();
+    }
+
+    @Override
+    public boolean clearSatellites() {
+        return memoryStorage.clearAll();
     }
 }

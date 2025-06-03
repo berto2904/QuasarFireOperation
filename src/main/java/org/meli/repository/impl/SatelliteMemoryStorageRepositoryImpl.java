@@ -1,9 +1,7 @@
 package org.meli.repository.impl;
 
 import org.meli.model.Satellite;
-import org.meli.repository.SatelliteReadOnlyRepository;
 import org.meli.repository.SatelliteReadWriteRepository;
-import org.meli.repository.SatelliteWriteableRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -31,8 +29,10 @@ public class SatelliteMemoryStorageRepositoryImpl implements SatelliteReadWriteR
         satelliteMap.put(satellite.getName().toLowerCase(), satellite);
     }
 
-    public void clear() {
+    @Override
+    public boolean clearAll() {
         satelliteMap.clear();
+        return isEmpty();
     }
 
     public boolean isEmpty() {

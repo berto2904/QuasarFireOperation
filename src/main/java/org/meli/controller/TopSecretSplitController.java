@@ -9,7 +9,9 @@ import org.meli.service.MessageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/topsecret_split")
@@ -46,5 +48,16 @@ public class TopSecretSplitController {
         } catch (Exception e) {
             return ResponseEntity.status(404).build();
         }
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Map<String, String>> clearTopSecretSplit() {
+        Map<String, String> response = new HashMap<>();
+        if (!locationServiceSplit.clearSatellites()){
+            response.put("message","Un error ocurrio al limpiar los satelites");
+            return ResponseEntity.internalServerError().body(response);
+        }
+        response.put("message", "Los satélites almacenados fueron eliminados correctamente.");
+        return ResponseEntity.ok(response);
     }
 }
