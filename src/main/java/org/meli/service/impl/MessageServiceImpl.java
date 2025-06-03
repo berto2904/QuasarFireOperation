@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class MessageServiceImpl implements MessageService {
+
     @Override
     public String getMessage(String[][] messages) {
         return MessageUtils.reconstructMessage(messages);

@@ -10,14 +10,13 @@ public class TrilaterationUtils {
     public static Point calculateLocation(List<Point> positions, double[] distancesArray) {
 
         if (positions.size() != 3 || distancesArray.length != 3) {
-            throw new IllegalArgumentException("Se requieren exactamente 3 posiciones y 3 distancias.");
+            throw new IllegalArgumentException("Se requieren 3 posiciones y 3 distancias.");
         }
 
         List<Double> distances = Arrays.stream(distancesArray)
                 .boxed()
                 .toList();
 
-        // p1: Kenobi, p2: Skywalker, p3: Sato
         Point p1 = positions.get(0);
         Point p2 = positions.get(1);
         Point p3 = positions.get(2);

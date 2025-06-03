@@ -23,7 +23,6 @@ public class MessageUtilsTest {
 
         String result = service.getMessage(messages);
 
-        assertNotNull(result);
         assertEquals("este es un mensaje", result);
     }
 
@@ -38,5 +37,33 @@ public class MessageUtilsTest {
         String result = service.getMessage(messages);
 
         assertNull(result);
+    }
+
+    @Test
+    void testMessageWithGapsAndOffsets() {
+        String[][] messages = {
+                {"este", "", "", "mensaje", ""},
+                {"", "es", "", "", "secreto"},
+                {"este", "", "un", "", ""}
+        };
+
+        MessageServiceImpl service = new MessageServiceImpl();
+        String result = service.getMessage(messages);
+
+        assertEquals("este es un mensaje secreto", result);
+    }
+
+    @Test
+    void testMessageWithOffsets() {
+        String[][] messages = {
+                {"", "este", "es", "un", "mensaje"},
+                {"este", "", "un", "mensaje"},
+                {"", "", "es", "", "mensaje"}
+        };
+
+        MessageServiceImpl service = new MessageServiceImpl();
+        String result = service.getMessage(messages);
+
+        assertEquals("este es un mensaje", result);
     }
 }

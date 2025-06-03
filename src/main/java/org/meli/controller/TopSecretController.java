@@ -7,6 +7,7 @@ import org.meli.dto.TopSecretResponseDTO;
 import org.meli.model.Point;
 import org.meli.service.LocationService;
 import org.meli.service.MessageService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,11 +18,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/topsecret")
-@RequiredArgsConstructor
 public class TopSecretController {
 
+    @Qualifier("locationService")
     private final LocationService locationService;
     private final MessageService messageService;
+
+    public TopSecretController(LocationService locationService, MessageService messageService) {
+        this.locationService = locationService;
+        this.messageService = messageService;
+    }
 
     @PostMapping
     public ResponseEntity<TopSecretResponseDTO> getTopSecret(@RequestBody TopSecretRequestDTO request){

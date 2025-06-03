@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.meli.model.Satellite;
 import org.meli.repository.SatelliteRepository;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -12,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Repository
 public class SatelliteRepositoryImpl implements SatelliteRepository {
 
     private final List<Satellite> satellites;

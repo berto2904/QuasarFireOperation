@@ -15,12 +15,11 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-@Service
+@Service("locationService")
 @RequiredArgsConstructor
 public class LocationServiceImpl implements LocationService {
 
     private final SatelliteRepository satelliteRepository;
-
 
     @Override
     public Point getLocation(double[] distances) {
