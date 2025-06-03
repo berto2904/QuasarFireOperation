@@ -66,4 +66,18 @@ public class MessageUtilsTest {
 
         assertEquals("este es un mensaje", result);
     }
+
+    @Test
+    void testMessageWithOffsets2() {
+        String[][] messages = {
+                {"este","","","mensaje"},
+                {"este", "", "un", "mensaje"},
+                {"", "", "es", "", "mensaje"}
+        };
+
+        MessageServiceImpl service = new MessageServiceImpl();
+        String result = service.getMessage(messages);
+
+        assertEquals("este es un mensaje", result);
+    }
 }
