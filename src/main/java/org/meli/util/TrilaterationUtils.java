@@ -40,7 +40,7 @@ public class TrilaterationUtils {
 
         double denominator = A * E - B * D;
         if (denominator == 0) {
-            throw new PositionNotResolvableException("No se puede determinar la posición: sistema indeterminado o satélites colineales.");
+            throw new PositionNotResolvableException("No se puede determinar la posición");
         }
 
         double x = (C * E - B * F) / denominator;
