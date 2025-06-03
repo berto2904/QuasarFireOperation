@@ -4,26 +4,34 @@ import lombok.RequiredArgsConstructor;
 import org.meli.dto.SatelliteDataDTO;
 import org.meli.model.Point;
 import org.meli.model.Satellite;
-import org.meli.repository.SatelliteMemoryStorage;
-import org.meli.repository.SatelliteRepository;
+import org.meli.repository.SatelliteReadWriteRepository;
+import org.meli.repository.impl.SatelliteMemoryStorageRepositoryImpl;
+import org.meli.repository.SatelliteReadOnlyRepository;
 import org.meli.service.LocationSplitService;
 import org.meli.util.TrilaterationUtils;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class LocationSplitServiceImpl implements LocationSplitService {
 
-    private final SatelliteMemoryStorage memoryStorage;
-    private final SatelliteRepository satelliteRepository;
+    private final SatelliteReadWriteRepository memoryStorage;
+    private final SatelliteReadOnlyRepository jsonStorage;
+
+    public LocationSplitServiceImpl(
+            @Qualifier("satelliteMemoryStorageRepositoryImpl") SatelliteReadWriteRepository memoryStorage,
+            @Qualifier("satelliteJsonFileRepositoryImpl") SatelliteReadOnlyRepository jsonStorage) {
+        this.memoryStorage = memoryStorage;
+        this.jsonStorage = jsonStorage;
+    }
+
 
     @Override
     public Point getLocation(double[] distances) {
-        List<Point> points = memoryStorage.getAllSatellites()
+        List<Point> points = memoryStorage.getSatellites()
                 .stream()
                 .map(Satellite::getPosition)
                 .toList();
@@ -32,7 +40,7 @@ public class LocationSplitServiceImpl implements LocationSplitService {
 
     @Override
     public void saveSatellite(SatelliteDataDTO satelliteDataDTO) {
-        Optional<Satellite> optionalSatellite = satelliteRepository.findByName(satelliteDataDTO.getName());
+        Optional<Satellite> optionalSatellite = jsonStorage.findByName(satelliteDataDTO.getName());
 
         if (optionalSatellite.isEmpty())
             throw new IllegalArgumentException("Satelite no existe");
@@ -49,7 +57,7 @@ public class LocationSplitServiceImpl implements LocationSplitService {
 
     @Override
     public List<SatelliteDataDTO> getAllSatellites() {
-        List<Satellite> satellitesOnMemory = memoryStorage.getAllSatellites();
+        List<Satellite> satellitesOnMemory = memoryStorage.getSatellites();
         return satellitesOnMemory.stream()
                 .map(s -> SatelliteDataDTO.builder()
                         .name(s.getName())

@@ -2,10 +2,9 @@ package org.meli.repository.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.meli.model.Satellite;
-import org.meli.repository.SatelliteRepository;
+import org.meli.repository.SatelliteReadOnlyRepository;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,12 +12,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class SatelliteRepositoryImpl implements SatelliteRepository {
+@Repository("satelliteJsonFileRepositoryImpl")
+public class SatelliteJsonFileRepositoryImpl implements SatelliteReadOnlyRepository {
 
     private final List<Satellite> satellites;
 
-    public SatelliteRepositoryImpl() throws IOException {
+    public SatelliteJsonFileRepositoryImpl() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         ClassPathResource resource = new ClassPathResource("satellites.json");
         try (InputStream is = resource.getInputStream()) {

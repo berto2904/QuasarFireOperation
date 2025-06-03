@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.meli.model.Point;
 import org.meli.model.Satellite;
-import org.meli.repository.SatelliteRepository;
-import org.meli.repository.impl.SatelliteRepositoryImpl;
+import org.meli.repository.SatelliteReadOnlyRepository;
+import org.meli.repository.impl.SatelliteJsonFileRepositoryImpl;
 import org.meli.service.LocationService;
 
 import java.io.IOException;
@@ -20,12 +20,12 @@ class LocationServiceTest {
 
     @Nested
     class WithMockRepository{
-        private SatelliteRepository satelliteRepository;
+        private SatelliteReadOnlyRepository satelliteRepository;
         private LocationService locationService;
 
         @BeforeEach
         void setup(){
-            satelliteRepository =mock(SatelliteRepository.class);
+            satelliteRepository =mock(SatelliteReadOnlyRepository.class);
             locationService = new LocationServiceImpl(satelliteRepository);
         }
 
@@ -49,11 +49,11 @@ class LocationServiceTest {
 
     @Nested
     class WithRealRepository {
-        private SatelliteRepository satelliteRepository;
+        private SatelliteReadOnlyRepository satelliteRepository;
 
         @BeforeEach
         void setup() throws IOException {
-            satelliteRepository = new SatelliteRepositoryImpl();
+            satelliteRepository = new SatelliteJsonFileRepositoryImpl();
         }
 
         @Test
