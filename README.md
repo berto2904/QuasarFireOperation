@@ -9,7 +9,7 @@ Crear un programa en Java que retorne la fuente y el contenido de un mensaje de 
 ## Requisitos Técnicos
 
 - Java 17
-- Maven 3.9.9
+- Maven 3.9.8
 - Docker
 
 ---
@@ -176,7 +176,7 @@ x = (C·E - F·B) / (A·E - B·D)
 y = (A·F - C·D) / (A·E - B·D)
 ```
 
-Cabe destacar que para esta resolucion se utilizo la regla de Cramer
+> Cabe destacar que para esta resolucion se utilizo la regla de Cramer
 Adjunto el repaso de la formula en el siguiente [link](https://openstax.org/books/precálculo-2ed/pages/9-8-resolver-sistemas-con-la-regla-de-cramer)
 
 ---
