@@ -6,13 +6,6 @@ Crear un programa en Java que retorne la fuente y el contenido de un mensaje de 
 
 ---
 
-## Repositorio público
-
-Este proyecto está disponible en GitHub:  
-https://github.com/berto2904/QuasarFireOperation
-
----
-
 ## Requisitos Técnicos
 
 - Java 17
@@ -27,6 +20,19 @@ https://github.com/berto2904/QuasarFireOperation
 docker build -t quasar-fire .
 docker run -p 8080:8080 quasar-fire
 ```
+---
+
+## Repositorio público
+
+Proyecto disponible en GitHub:  
+https://github.com/berto2904/QuasarFireOperation
+
+---
+
+## Servicio desplegado
+
+URL pública:  
+https://quasarfireoperation.onrender.com
 
 ---
 
@@ -170,6 +176,9 @@ x = (C·E - F·B) / (A·E - B·D)
 y = (A·F - C·D) / (A·E - B·D)
 ```
 
+Cabe destacar que para esta resolucion se utilizo la regla de Cramer
+Adjunto el repaso de la formula en el siguiente [link](https://openstax.org/books/precálculo-2ed/pages/9-8-resolver-sistemas-con-la-regla-de-cramer)
+
 ---
 
 ## Reconstrucción del mensaje
@@ -180,12 +189,7 @@ Si hay conflicto (palabras distintas en la misma posición), se lanza una excepc
 
 ---
 
-## Servicio desplegado
 
-URL pública:  
-https://quasarfireoperation.onrender.com/topsecret
-
----
 
 ## Autor
 
